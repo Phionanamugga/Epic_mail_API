@@ -48,6 +48,18 @@ class Validate:
         except KeyError:
             return "Invalid fields"
 
+    def validate_message(self, data):
+        # Validates the message fields
+        message_fields = ['subject', 'message']
+        try:
+            for message_field in message_fields:
+                if data[message_field] == "":
+                    return message_field + " cannot be blank"
+            else:
+                return "Valid"
+        except KeyError:
+            return "Invalid Key Fields"
+
 
 
 
