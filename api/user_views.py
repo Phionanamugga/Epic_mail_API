@@ -58,6 +58,21 @@ def register_user():
         return "Invalid key fields"
 
 
+@user.route('/api/v1/auth/login', methods=['POST'])
+def login():
+    """Logs in a user"""
+    data = request.get_json()
+    try:
+        email = data['email']
+        is_valid = validate.validate_login(data)
+        if re.match(r"([\w\.-]+)@([\w\.-]+)(\.[\w\.]+$)", email) and\
+           is_valid == "Credentials valid":
+            return assigns_token(data)
+        return jsonify({"message": is_valid}), 400
+    except KeyError:
+        return jsonify({"message": "Invalid keys"}), 400
+
+
 def assigns_token(data):
     for item in users:
         if item.email == data['email'] and\
