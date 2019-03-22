@@ -60,6 +60,9 @@ class Validate:
         except KeyError:
             return "Invalid Key Fields"
 
-
+    def validate_id(self, item_id, item_list):
+        if item_id != 0 and item_id <= len(item_list):
+            return True
+        return False
 
 
