@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, json, request, abort
-from .messages_model import Message, Received, messages
+from .messages_model import Message, messages
 from .validations import Validate
 from .user_views import token_required, created_token
 from datetime import datetime
@@ -54,14 +54,3 @@ def delete_message(message_id):
             messages.remove(msg)
     return jsonify({"message": "message successfully removed"}), 200
 
-
-@message.route("/api/v1/messages/received", methods=["GET"])
-@token_required
-def all_received_messages():
-    received_id = len(received_messages)+1
-    sender_id = len(senders)+1
-    is_valid = validate.validate_message(data)
-    if valid == "Valid":
-        data["status"] = "received"
-        Received_messages = [msg_received.get_all_received_messages for msg_received in messages] 
-        return jsonify({"received_messages": Received_messages})
