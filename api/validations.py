@@ -2,6 +2,9 @@ import re
 from functools import wraps
 from flask import jsonify
 
+name_regex = r"[a-zA-Z]"
+password_regex = r"(?=.*[0-9])"
+
 
 class Validate:
     """This class contains validators for the different entries"""
